@@ -1,3 +1,5 @@
+'use strict';
+
 // ROUTE for API
 module.exports = (app) => {
   // To request
@@ -14,20 +16,63 @@ module.exports = (app) => {
     res.status(202).json(peoples);
   });
 
+  // ROUTE to API STATE
   app.get('/api/v1/state', (req, res) => {
+    // Create REQUEST FOR SITE
     request(url, function(error, response, body) {
+    // CHECKING ERROR
     if(error) {
       console.log("Error: " + error);
+      // SEND resp
       res.status(500).send();
     }
-    console.log(body);
+    // Create list of states and your values
+    let list = [];
+
+    // Using the DOM navigator
     const $ = cheerio.load(body);
 
-    $('select[name=selEstado]').each( (index) => {
-      console.log(this);
+    // Loop in elements target
+    $('select[name=selEstado] option').each( (index, el) => {
+      // Variable for mounting the state data
+      let state = {
+        value: el.attribs.value,
+        name:  el.children.map((el) => el.data).join('') // Item by item after concact the index and trasnform in string
+      };
+      // Add in list
+      list.push(state);
     });
-    res.status(202).json(body);
+    res.status(202).json(list);
     });
   });
 
+  // ROUTE to API FUEL
+  app.get('/api/v1/fuel', (req, res) => {
+    // Create REQUEST FOR SITE
+    request(url, function(error, response, body) {
+    // CHECKING ERROR
+    if(error) {
+      console.log("Error: " + error);
+      // SEND resp
+      res.status(500).send();
+    }
+    // Create list of states and your values
+    let list = [];
+
+    // Using the DOM navigator
+    const $ = cheerio.load(body);
+
+    // Loop in elements target
+    $('select[name=selCombustivel] option').each( (index, el) => {
+      // Variable for mounting the state data
+      let fuel = {
+        value: el.attribs.value,
+        name:  el.children.map((el) => el.data).join('') // Item by item after concact the index and trasnform in string
+      };
+      // Add in list
+      list.push(fuel);
+    });
+    res.status(202).json(list);
+    });
+  });
 };

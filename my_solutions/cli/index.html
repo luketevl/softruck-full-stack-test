@@ -10,13 +10,9 @@
       <link rel="stylesheet" href="css/style.css" />
 
     </head>
-    <body ng-controller="AppCtrl as principalCtrl">
-      {{principalCtrl.teste}}
-      <div ng-controller="AppCtrl" ng-cloak>
-
+    <body ng-controller="AppCtrl">
         <!-- Header -->
         <header ng-include="'views/header.html'"></header>
-
 
           <!-- Form -->
           <md-content layout-padding="">
@@ -25,17 +21,17 @@
                 <div layout-gt-sm="row">
                   <md-input-container class="md-block" flex-gt-sm="">
                     <label>State</label>
-                    <md-select ng-model="user.state">
-                      <md-option ng-repeat="state in states" value="{{state.abbrev}}">
-                        {{state.abbrev}}
+                    <md-select ng-model="selEstado">
+                      <md-option ng-repeat="state in states track by $index" value="{{state.value}}">
+                        {{state.name}}
                       </md-option>
                     </md-select>
                   </md-input-container>
                   <md-input-container class="md-block" flex-gt-sm="">
                     <label>Fuel</label>
-                    <md-select ng-model="user.state">
-                      <md-option ng-repeat="state in states" value="{{state.abbrev}}">
-                        {{state.abbrev}}
+                    <md-select ng-model="selCombustivel">
+                      <md-option ng-repeat="fuel in fuels track by $index" value="{{fuel.value}}">
+                        {{fuel.name}}
                       </md-option>
                     </md-select>
                   </md-input-container>
@@ -47,10 +43,8 @@
         <!-- Footer -->
         <footer ng-include="'views/footer.html'"></footer>
 
-    </div>
       <!-- Importing the SCRIPTS -->
       <script src="bower_components/angular/angular.min.js"></script>
-
       <script src="bower_components/angular-animate/angular-animate.min.js"></script>
       <script src="bower_components/angular-aria/angular-aria.js"></script>
       <script src="bower_components/angular-animate/angular-animate.js"></script>

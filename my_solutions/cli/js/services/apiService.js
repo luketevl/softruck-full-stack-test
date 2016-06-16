@@ -8,16 +8,26 @@
   function api($http, config){
 
     /**
-      * GET PEOPPLES
+      * GET STATES
       * @author lukete
-      * @since 14/06/16
+      * @since 15/06/16
       * @return $http response
     **/
-    var _getPeoples = function(){
-      return $http.get(config.REST_URL + config.REST_URL_PEOPLES);
+    var _getStates = function(){
+      return $http.get(config.REST_URL + config.REST_URL_STATE);
+    };
+    /**
+      * GET STATES
+      * @author lukete
+      * @since 16/06/16
+      * @return $http response
+    **/
+    var _getFuels = function(){
+      return $http.get(config.REST_URL + config.REST_URL_FUEL);
     };
     return {
-      getPeoples : _getPeoples
+      getStates : _getStates,
+      getFuels : _getFuels
     };
   }
 })();

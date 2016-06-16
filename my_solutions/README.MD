@@ -2,11 +2,13 @@
   - In server folder use the commands:
   ```
     npm install
+  ```
+  ```
     npm start
   ```
   - In cli folder use the command:
   ```
-    bower start
+    bower install
   ```
   - The task runner in parent folder _my_solutions_
   ```

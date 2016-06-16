@@ -11,11 +11,23 @@
   function AppCtrl($scope, api){
 
     // PRomisse result request
-    /* api.getPeoples().then((res) => {
+    api.getStates().then(function(res) {
       // Check de httpcode
       if(res.status == 202){
-          $scope.peoples = res.data;
+          $scope.states = res.data;
       }
-    }, (error) => console.log('error')); */
+      console.log(res);
+    }, function(error){ console.log('error')});
+
+    // PRomisse result request
+    api.getFuels().then(function(res) {
+      // Check de httpcode
+      if(res.status == 202){
+          $scope.fuels = res.data;
+      }
+      console.log(res);
+    }, function(error){ console.log('error')});
+
+
   }
 })();

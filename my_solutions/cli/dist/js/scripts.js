@@ -13,33 +13,24 @@ angular.module('app', ['ngMaterial']);
   function AppCtrl($scope, api){
 
     // PRomisse result request
-    /* api.getPeoples().then((res) => {
+    api.getStates().then(function(res) {
       // Check de httpcode
       if(res.status == 202){
-          $scope.peoples = res.data;
+          $scope.states = res.data;
       }
-    }, (error) => console.log('error')); */
-  }
-})();
+      console.log(res);
+    }, function(error){ console.log('error')});
 
-(function(){
-  'use strict';
+    // PRomisse result request
+    api.getFuels().then(function(res) {
+      // Check de httpcode
+      if(res.status == 202){
+          $scope.fuels = res.data;
+      }
+      console.log(res);
+    }, function(error){ console.log('error')});
 
-  // Searching module
-  angular.module('app').directive('uiCard', uiCard);
 
-  // Creating the directive
-  function uiCard(){
-    let directive = {
-      restrict: 'E', // Element directive
-      templateUrl: 'views/card.html',
-      replace: true,
-      scope: {
-        "people":               '=peopleData',
-      },
-    };
-
-    return directive;
   }
 })();
 
@@ -53,16 +44,26 @@ angular.module('app', ['ngMaterial']);
   function api($http, config){
 
     /**
-      * GET PEOPPLES
+      * GET STATES
       * @author lukete
-      * @since 14/06/16
+      * @since 15/06/16
       * @return $http response
     **/
-    var _getPeoples = function(){
-      return $http.get(config.REST_URL + config.REST_URL_PEOPLES);
+    var _getStates = function(){
+      return $http.get(config.REST_URL + config.REST_URL_STATE);
+    };
+    /**
+      * GET STATES
+      * @author lukete
+      * @since 16/06/16
+      * @return $http response
+    **/
+    var _getFuels = function(){
+      return $http.get(config.REST_URL + config.REST_URL_FUEL);
     };
     return {
-      getPeoples : _getPeoples
+      getStates : _getStates,
+      getFuels : _getFuels
     };
   }
 })();
@@ -70,5 +71,6 @@ angular.module('app', ['ngMaterial']);
 angular.module('app').value("config", {
 
   REST_URL          : 'http://localhost:595/api/v1/',
-  REST_URL_PEOPLES  : 'people'
+  REST_URL_STATE    : 'state',
+  REST_URL_FUEL     : 'fuel',
 });
