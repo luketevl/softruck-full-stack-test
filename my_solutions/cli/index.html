@@ -21,20 +21,21 @@
                 <div layout-gt-sm="row">
                   <md-input-container class="md-block" flex-gt-sm="">
                     <label>State</label>
-                    <md-select ng-model="selEstado">
-                      <md-option ng-repeat="state in states track by $index" value="{{state.value}}">
+                    <md-select ng-model="selEstado" ng-model-options="{trackBy: '$value.value'}">
+                      <md-option ng-repeat="state in states" ng-value="state">
                         {{state.name}}
                       </md-option>
                     </md-select>
                   </md-input-container>
                   <md-input-container class="md-block" flex-gt-sm="">
                     <label>Fuel</label>
-                    <md-select ng-model="selCombustivel">
-                      <md-option ng-repeat="fuel in fuels track by $index" value="{{fuel.value}}">
+                    <md-select ng-model="selCombustivel" ng-model-options="{trackBy: '$value.value'}">
+                      <md-option ng-repeat="fuel in fuels" ng-value="fuel">
                         {{fuel.name}}
                       </md-option>
                     </md-select>
                   </md-input-container>
+                  <md-button class="md-raised md-primary" ng-click="postListData()" ng-disabled="!(selCombustivel && selEstado)">Search</md-button>
                 </div>
               </form>
             </div>

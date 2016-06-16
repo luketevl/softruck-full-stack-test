@@ -13,12 +13,13 @@
           dest: 'cli/dist/js/scripts.js'
         },
       },
+      /*
       uglify:{
         scripts:{
           src: ['cli/dist/js/scripts.js'],
           dest: 'cli/dist/js/scripts.min.js'
         }
-      },
+      }, */
       cssmin:{
         all:{
           src: ['cli/css/*.css'],
@@ -47,6 +48,6 @@
 
 
     // TASKS
-    grunt.registerTask('default', ['cssmin', 'htmlmin', 'concat', 'uglify']);
+    grunt.registerTask('default', ['cssmin', 'htmlmin', 'concat']);
   }
 })();

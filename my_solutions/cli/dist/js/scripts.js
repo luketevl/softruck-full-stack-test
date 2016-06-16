@@ -13,23 +13,41 @@ angular.module('app', ['ngMaterial']);
   function AppCtrl($scope, api){
 
     // PRomisse result request
-    api.getStates().then(function(res) {
+    api.getStates().then((res) => {
       // Check de httpcode
       if(res.status == 202){
           $scope.states = res.data;
       }
-      console.log(res);
-    }, function(error){ console.log('error')});
+    }, (error) => {
+          console.log('error');
+        });
 
     // PRomisse result request
-    api.getFuels().then(function(res) {
+    api.getFuels().then((res) => {
       // Check de httpcode
       if(res.status == 202){
           $scope.fuels = res.data;
       }
-      console.log(res);
-    }, function(error){ console.log('error')});
+    }, (error) =>{
+        console.log('error');
+    });
 
+    // Function post the content
+    $scope.postListData = () => {
+      // mounting the data
+      let data = {
+        selCombustivel: $scope.selCombustivel.value,
+        selEstado: $scope.selEstado.value
+      };
+      console.log(data);
+      api.postListData(data).then((res) =>{
+          if(res.status == 202){
+            console.log(res);
+          }
+      }, (error) =>{
+        console.log(error);
+      });
+    }
 
   }
 })();
@@ -61,9 +79,20 @@ angular.module('app', ['ngMaterial']);
     var _getFuels = function(){
       return $http.get(config.REST_URL + config.REST_URL_FUEL);
     };
+    /**
+      * POST STATE and FUEL
+      * @author lukete
+      * @since 16/06/16
+      * @return $http response
+    **/
+    var _postListData = function(data){
+      console.log(data);
+      return $http.post(config.REST_URL + config.REST_URL_LISTDATA, data);
+    };
     return {
-      getStates : _getStates,
-      getFuels : _getFuels
+      getStates     : _getStates,
+      getFuels      : _getFuels,
+      postListData  : _postListData,
     };
   }
 })();
@@ -73,4 +102,5 @@ angular.module('app').value("config", {
   REST_URL          : 'http://localhost:595/api/v1/',
   REST_URL_STATE    : 'state',
   REST_URL_FUEL     : 'fuel',
+  REST_URL_LISTDATA : 'list_data',
 });
