@@ -25,7 +25,7 @@ module.exports = (sequelize) => {
   return {
     addNew: (dados) => {
       sequelize.sync().then(function() {
-        return User.create(dados);
+        return anpData.create(dados);
       }).then(function(item) {
         console.log(item.get({
           plain: true

@@ -75,7 +75,7 @@ module.exports = (app) => {
       list: scrapeCtr.scrapeListData(body),
     };
 
-    citiesData.addNew(dataGeral.list);
+  //  citiesData.addNew(dataGeral.list);
 
     res.status(202).json(dataGeral);
     });
