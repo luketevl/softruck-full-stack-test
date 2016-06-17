@@ -37,6 +37,9 @@
 ## Using the server
   - The API using URL **http://localhost:595/api/v1/people**
 
+## DATABASE
+  - Config user and pass in folder _my_solutions/server/config/db.js_
+
 
 ## Observations
   - I'm prefering controling the packages in different folders

@@ -8,6 +8,10 @@ module.exports = (app) => {
   const scrapeCtr = require('../controllers/scrapeController')();
   const querystring = require('querystring');
 
+  const sequelize = require('../../config/db')();
+
+  const citiesData = require('../../models/cities')(sequelize);
+
   const url         = "http://www.anp.gov.br/preco/prc/";
   const urlIndex    = url+"Resumo_Por_Estado_Index.asp";
   const urlMunicipio  = url+"Resumo_Por_Estado_Municipio.asp";

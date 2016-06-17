@@ -2,7 +2,7 @@
 
 // Creating base routes
 const express     = require('express');
-const bodyParser = require('body-parser');
+const bodyParser  = require('body-parser');
 
 // Creating APP
 const app = express();
