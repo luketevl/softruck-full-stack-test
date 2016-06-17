@@ -49,36 +49,53 @@ module.exports = () =>{
     scrapeListData: (body) => {
       // Using the DOM navigator
       const $ = cheerio.load(body);
-      list = [];
+      let informations = {
+        cities :[],
+      };
 
       // Loop in elements target
-      $('select[name=selCombustivel] option').each( (index, el) => {
-        // Variable for mounting the state data
-        let data = {
-          value: el.attribs.value,
-          name:  el.children.map((el) => el.data).join('') // Item by item after concact the index and trasnform in string
-        };
-        // Add in list
-        list.push(data);
-      });
+      $('tr').each( (index, el) => {
+        if(index > 2){
+          // Scape the headers
+          let childrens = $(el).children();
 
-      return list;
+          // Variable for mounting the state datas
+          informations.cities.push({
+            name: $(childrens).eq(0).children().eq(0).text(),
+            fuel: '',
+            priceConsumer: {
+              priceMed:     $(childrens).eq(2).text(),
+              desvioPadrao: $(childrens).eq(3).text(),
+              priceMin:     $(childrens).eq(4).text(),
+              priceMax:     $(childrens).eq(5).text(),
+              margemMed:    $(childrens).eq(6).text(),
+            },
+            distributionPrice: {
+              priceMed:     $(childrens).eq(7).text(),
+              desvioPadrao: $(childrens).eq(8).text(),
+              priceMin:     $(childrens).eq(9).text(),
+              priceMax:     $(childrens).eq(10).text(),
+            },
+          });
+        }
+        });
+      return informations;
     },
 
-    _getTitle: (body) => {
+    getTitle: (body) => {
       // Using the DOM navigator
       const $ = cheerio.load(body);
       return $('.tabela3 > div h3').eq(0).text();
     },
-    _getSummary: (body) => {
+    getSummary: (body) => {
       // Using the DOM navigator
       const $ = cheerio.load(body);
-      return $('.tabela3 > div h3)').eq(1).text();
+      return $('.tabela3 > div h3').eq(1).text();
     },
-    _getPeriod: (body) => {
+    getPeriod: (body) => {
       // Using the DOM navigator
       const $ = cheerio.load(body);
-      return $('.tabela3 > div h3').eq(2).text();
+      return $('.tabela3 > div h3').eq(-1).text();
     },
 
   }

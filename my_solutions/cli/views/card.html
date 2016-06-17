@@ -1,5 +1,81 @@
-<article class="card">
-  <input type="hidden" value="{{::people.id}}"/>
-  <h1>{{::people.name}}</h1>
-  <p>{{::people.disclosableInfo}}</p>
-</article>
+<section layout="column" layout-align="center center">
+  <h1>{{::title}}</h1>
+  <div layout="column" layout-align="center center" flex="20">
+    <p>{{::period}}</p>
+    <p class="md-caption">{{::summary}}</p>
+  </div>
+</section>
+
+<!-- FORM -->
+<md-content layout-gt-sm="row" layout-padding layout-align="center center">
+  <form>
+    <md-input-container class="md-block">
+      <label>City name</label>
+      <input type="text" name="name" ng-model="name" placeholder="Type for search..."/>
+    </md-input-container>
+  </form>
+</md-content>
+<md-content class="md-padding bg-color" layout-xs="column" layout="row" layout-align="center center">
+   <div flex-xs flex-gt-xs="100" layout="column">
+     <md-card ng-repeat="item in list_data.cities | filter: name">
+       <md-card-title>
+         <md-card-title-text>
+           <span class="md-headline">{{::item.name}}</span>
+         </md-card-title-text>
+       </md-card-title>
+       <md-card-content>
+
+         <md-toolbar layout="column" class="md-hue-4">
+           <div class="md-toolbar-tools">
+             <h1>Consumer</h1>
+           </div>
+         </md-toolbar>
+         <div layout-gt-xs="row">
+          <md-input-container class="md-block" flex-gt-xs>
+            <label>Preço médio</label>
+            <input ng-model="item.priceConsumer.priceMed" value="{{item.priceConsumer.priceMed}}" disabled>
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-xs>
+            <label>Desvio Padrão</label>
+            <input ng-model="item.priceConsumer.desvioPadrao" value="{{item.priceConsumer.desvioPadrao}}" disabled>
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-xs>
+            <label>Preço Mínimo</label>
+            <input ng-model="item.priceConsumer.priceMin" value="{{item.priceConsumer.priceMin}}" disabled>
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-xs>
+            <label>Preço Máximo</label>
+            <input ng-model="item.priceConsumer.priceMax" value="{{item.priceConsumer.priceMax}}" disabled>
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-xs>
+            <label>Margem Média</label>
+            <input ng-model="item.priceConsumer.margemMed" value="{{item.priceConsumer.margemMed}}" disabled>
+          </md-input-container>
+        </div>
+          <md-toolbar layout="column" class="md-hue-4">
+            <div class="md-toolbar-tools">
+              <h1>Distribution</h1>
+            </div>
+          </md-toolbar>
+          <div layout-gt-xs="row">
+         <md-input-container class="md-block" flex-gt-xs>
+           <label>Preço médio</label>
+           <input ng-model="item.distributionPrice.priceMed" value="{{item.distributionPrice.priceMed}}" disabled>
+         </md-input-container>
+         <md-input-container class="md-block" flex-gt-xs>
+           <label>Desvio Padrão</label>
+           <input ng-model="item.distributionPrice.desvioPadrao" value="{{item.distributionPrice.desvioPadrao}}" disabled>
+         </md-input-container>
+         <md-input-container class="md-block" flex-gt-xs>
+           <label>Preço Mínimo</label>
+           <input ng-model="item.distributionPrice.priceMin" value="{{item.distributionPrice.priceMin}}" disabled>
+         </md-input-container>
+         <md-input-container class="md-block" flex-gt-xs>
+           <label>Preço Máximo</label>
+           <input ng-model="item.distributionPrice.priceMax" value="{{item.distributionPrice.priceMax}}" disabled>
+         </md-input-container>
+       </div>
+       </md-card-content>
+     </md-card>
+     </div>
+ </md-content>

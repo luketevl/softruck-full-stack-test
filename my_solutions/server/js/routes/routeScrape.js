@@ -52,10 +52,10 @@ module.exports = (app) => {
       url: urlMunicipio,
       form: querystring.stringify(informations),
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+        'Content-Length': querystring.stringify(informations).length,
       }
-    }
-    console.log(request_options);
+    };
     // Create REQUEST FOR SITE
     request.post(request_options, (error, response, body) => {
     // CHECKING ERROR
@@ -64,16 +64,13 @@ module.exports = (app) => {
       // SEND resp
       res.status(500).send();
     }
-    console.log(body);
     let dataGeral = {
-      title: scrapeCtr._getTitle(body),
-      summary: scrapeCtr._getSummary(body),
-      period: scrapeCtr._getPeriod(body),
-      list: [],
-    }
-    console.log(dataGeral);
-    dataGeral.list = scrapeCtr.scrapeFuels(body);
-    res.status(202).json(request_options);
+      title: scrapeCtr.getTitle(body),
+      summary: scrapeCtr.getSummary(body),
+      period: scrapeCtr.getPeriod(body),
+      list: scrapeCtr.scrapeListData(body),
+    };
+    res.status(202).json(dataGeral);
     });
   });
 };

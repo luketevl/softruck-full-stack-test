@@ -41,6 +41,17 @@
             </div>
           </md-content>
 
+          <!-- Result content -->
+          <section ng-if="showResult">
+            <md-toolbar layout="column" class="md-hue-4">
+              <div class="md-toolbar-tools">
+                <h1>Results</h1>
+              </div>
+            </md-toolbar>
+            <section ng-include="'views/card.html'"></section>
+          </section>
+
+
         <!-- Footer -->
         <footer ng-include="'views/footer.html'"></footer>
 
