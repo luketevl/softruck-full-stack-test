@@ -74,8 +74,7 @@ module.exports = (app) => {
       period: scrapeCtr.getPeriod(body),
       list: scrapeCtr.scrapeListData(body),
     };
-
-  //  citiesData.addNew(dataGeral.list);
+    citiesData.addNew([].concat(dataGeral.list.cities, informations));
 
     res.status(202).json(dataGeral);
     });
