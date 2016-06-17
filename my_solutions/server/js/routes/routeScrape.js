@@ -8,10 +8,6 @@ module.exports = (app) => {
   const scrapeCtr = require('../controllers/scrapeController')();
   const querystring = require('querystring');
 
-  const sequelize = require('../../config/db')();
-
-  const citiesData = require('../../models/cities')(sequelize);
-
   const url         = "http://www.anp.gov.br/preco/prc/";
   const urlIndex    = url+"Resumo_Por_Estado_Index.asp";
   const urlMunicipio  = url+"Resumo_Por_Estado_Municipio.asp";
@@ -49,6 +45,10 @@ module.exports = (app) => {
 
   // ROUTE to API FUEL
   app.post('/api/v1/list_data', (req, res) => {
+    const sequelize = require('../../config/db')();
+
+    const citiesData = require('../../models/cities')(sequelize);
+
     let informations = req.body;
 
     // Mounting form post
@@ -74,6 +74,9 @@ module.exports = (app) => {
       period: scrapeCtr.getPeriod(body),
       list: scrapeCtr.scrapeListData(body),
     };
+
+    citiesData.addNew(dataGeral.list);
+
     res.status(202).json(dataGeral);
     });
   });
