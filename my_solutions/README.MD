@@ -31,7 +31,15 @@
 
 
 ## Using the client
-  - Open the file **index.html** to use
+  - Install the http-server
+  ```
+  npm install http-server -g
+  ```
+  - Enter in folder _cli_ and run the command
+  ```
+  http-server
+  ```
+  - Frontend using the http://localhost:8080/
 
 
 ## Using the server

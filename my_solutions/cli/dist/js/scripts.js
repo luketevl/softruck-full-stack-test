@@ -16,34 +16,34 @@ angular.module('app', ['ngMaterial']);
     $scope.showResult = false;
 
     // PRomisse result request
-    api.getStates().then((res) => {
+    api.getStates().then(function(res) {
       // Check de httpcode
       if(res.status == 202){
           $scope.states = res.data;
       }
-    }, (error) => {
+    }, function(error) {
           console.log('error');
         });
 
     // PRomisse result request
-    api.getFuels().then((res) => {
+    api.getFuels().then(function(res) {
       // Check de httpcode
       if(res.status == 202){
           $scope.fuels = res.data;
       }
-    }, (error) =>{
+    }, function(error){
         console.log('error');
     });
 
     // Function post the content
-    $scope.postListData = () => {
+    $scope.postListData = function () {
       // mounting the data
       let data = {
         selCombustivel: $scope.selCombustivel.value,
         selEstado: $scope.selEstado.value,
         selSemana: "886*De 05/06/2016 a 11/06/2016",
       };
-      api.postListData(data).then((res) =>{
+      api.postListData(data).then(function(res){
           if(res.status == 202){
             console.log(res);
             $scope.title      = res.data.title;
@@ -52,7 +52,7 @@ angular.module('app', ['ngMaterial']);
             $scope.list_data  = res.data.list;
             $scope.showResult = true;
           }
-      }, (error) =>{
+      }, function(error){
         console.log(error);
         $scope.showResult = false;
       });
